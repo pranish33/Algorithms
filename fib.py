@@ -8,3 +8,8 @@ def fib(n):
         return n-1 + n-2
     
 print(fib(5))
+
+
+# this program has the time complexity of O(2^n) as Exponential time complexity 
+# and O(n) space complexity 
+

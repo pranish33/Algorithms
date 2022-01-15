@@ -11,6 +11,35 @@ def dijsktra(graph, src, dest):
         dest ([type]): [description]
     """
 
+    inf = sys.maxsize
+    node_data = {
+        'A': {'cost': inf, 'pred': []},
+        'B': {'cost': inf, 'pred': []},
+        'C': {'cost': inf, 'pred': []},
+        'D': {'cost': inf, 'pred': []},
+        'E': {'cost': inf, 'pred': []},
+        'F': {'cost': inf, 'pred': []}
+    }
+    node_data[src]['cost'] = 0
+    visited = []
+    temp = src
+    for i in range(5):
+        if temp not in visited:
+            visited.append(temp)
+            min_heap = []
+            for j in graph[temp]:
+                if j not in visited:
+                    cost = node_data[temp]['cost'] + graph[temp][j]
+                    if cost < node_data[j]['cost']:
+                        node_data[j]['cost'] = cost
+                        node_data[j]['pred'] = node_data[temp]['pred'] + \
+                            list(temp)
+                    heappush(min_heap, (node_data[j]['cost'], j))
+        heapify(min_heap)
+        temp = min_heap[0][1]
+    print("shortest Distance is " + str(node_data[dest]['cost']))
+    print("shortest Path are " + str(node_data[dest]['pred'] + list(dest)))
+
 
 if __name__ == '__main__':
     graph = {
